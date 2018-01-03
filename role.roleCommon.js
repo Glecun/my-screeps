@@ -66,7 +66,12 @@ var roleCommon = {
 	},
 	
 	flagMove: function (creep, flagsMove) {
-		creep.moveTo(flagsMove[0]);
+	    var flagMove = creep.pos.findClosestByPath(flagsMove);
+	    if (flagMove!=null)
+		    creep.moveTo(flagMove);
+		else
+		    creep.moveTo(flagsMove[0]);
+		    
 	},
 	
 	standBy: function (creep,x,y,roomName) {

@@ -1,4 +1,4 @@
-﻿var roleCommon = require('role.roleCommon');
+var roleCommon = require('role.roleCommon');
 
 var roleGuard = {
 
