@@ -13,7 +13,7 @@ module.exports.loop = function () {
 		
 		infos['spawn'] = infosController.getInfosSpawn(Game.spawns[mySpawnIndex]);
 		infos['mode'] = modeController.getMode(infos);
-		
+
 		notifyController.run(infos);
 		
 		utilsController.cleanNonExistingcreep(infos);

@@ -2,7 +2,7 @@ var modeController = {
 
     getMode: function(infos) {
         
-        if (Object.keys(infos['creeps']).length <= 7)
+        if (Object.keys(infos['spawn']['room']['creeps']).length <= 7)
 			return 'crisis';
 		if (infos['spawn']['room']['constructionSites'].length >= 10)
 			return 'build';
