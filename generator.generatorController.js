@@ -82,6 +82,9 @@ var rolesLevel = {
 
 };
 
+//Command to generate a claimer
+//Game.spawns['Spawn'].spawnCreep([CLAIM, MOVE], 'Claimer1',{memory: {role: 'claimer'}});
+
 var generatorController = {
     run: function(infos) {
         if(infos['cpuLimitReached']) {
@@ -99,12 +102,12 @@ var generatorController = {
 
     getWhichRoleToCreateOrErase: function (infos,createOrErase) {
 
-        var nbCreeps = Object.keys(infos['creeps']).length;
+        var nbCreeps = Object.keys(infos['spawn']['room']['creeps']).length;
         if (nbCreeps==0) nbCreeps=1; // prevent division by zero
 
         var rolesNbTab =  {};
         for ( aRole in rolesSpawnPercent){
-            rolesNbTab[aRole] = _.filter(infos['creeps'], (aCreep) => aCreep.memory.role == aRole).length;
+            rolesNbTab[aRole] = _.filter(infos['spawn']['room']['creeps'], (aCreep) => aCreep.memory.role == aRole).length;
         }
 
         var rolesValTab =  [];
@@ -128,7 +131,7 @@ var generatorController = {
     },
 
     removeOlderCreep:function(infos,aRole){
-        var creepsRole = _.filter(infos['creeps'], (aCreep) => aCreep.memory.role == aRole);
+        var creepsRole = _.filter(infos['spawn']['room']['creeps'], (aCreep) => aCreep.memory.role == aRole);
         console.log(creepsRole[0].name);
         creepsRole[0].suicide();
     },
