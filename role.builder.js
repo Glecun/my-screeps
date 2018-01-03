@@ -5,6 +5,7 @@ var roleBuilder = {
 
     run: function(creep,infos) {
         var constructionSites = infos['spawn']['room']['constructionSites'];
+        constructionSites = constructionSites.concat(infos['spawnToBuild']);
 		var structuresToRepair = _.filter(infos['spawn']['room']['structuresToRepair'], (aStructure) => aStructure.hits < aStructure.hitsMax);
 		
         this.getDecision(creep,constructionSites,structuresToRepair);
@@ -57,7 +58,11 @@ var roleBuilder = {
         }
 
         if (creep.memory.decision=='build') {
-			var constructionSite = utilsController.getMostAdvancedConstructionSite(constructionSites);
+			var constructionSite = null;
+			if (infos['spawnToBuild'].length>0)
+			    constructionSite = infos['spawnToBuild'][0];
+			else 
+			    constructionSite = utilsController.getMostAdvancedConstructionSite(constructionSites);
             if(creep.build(constructionSite) == ERR_NOT_IN_RANGE) 
                 creep.moveTo(constructionSite, {visualizePathStyle: {stroke: '#ffffff'}});
 			if (constructionSite==null || (constructionSite.progress==constructionSite.progressTotal)){
