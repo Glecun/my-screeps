@@ -8,7 +8,8 @@ var infosController = {
 						time : Game.time,
 						cpuUsed : Game.cpu.getUsed(),
 						cpuLimit : Game.cpu.limit,
-						flags: Game.flags
+						flags: Game.flags,
+						spawnToBuild : _.filter(Game.constructionSites, (aConstructionSite) => aConstructionSite.structureType==STRUCTURE_SPAWN )
 					};
 	},
 
@@ -18,6 +19,7 @@ var infosController = {
 					room : { 
 									room:spawn.room,
 									creeps: spawn.room.find(FIND_MY_CREEPS),
+									creepsNames:spawn.room.find(FIND_MY_CREEPS).map(creep => creep.name),
 									energyCapacityAvailable: spawn.room.energyCapacityAvailable,
 									towers: spawn.room.find(FIND_MY_STRUCTURES, {
 																filter: (structure) => {
